@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <color name="colorPrimary">#3F51B5</color>
+  <color name="colorPrimaryDark">#303F9F</color>
+  <color name="colorAccent">#FF4081</color>
+
+  <color name="black_effective">#2a2a2a</color>
+  <color name="white">#ffffff</color>
+  <color name="transparent">#00000000</color>
+
+  <!--Design colors-->
+  <color name="red_dark">#F06423</color>
+  <color name="red_dark2">#025B92</color>
+  <color name="cyan">#b5e3e7</color>
+  <color name="cyan_dark">#C8716F</color>
+  <color name="navy_blue">#FCAE32</color>
+
+  <color name="android_green">#00B4AB</color>
+  <color name="blue_black_dark">#66B825</color>
+
+  <color name="google">#d34836</color>
+</resources>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_pro"
+            android:title="@string/nav_pro" />
+        <item
+          android:id="@+id/nav_learn"
+          android:title="@string/nav_learn" />
+        <item
+          android:id="@+id/nav_fac"
+          android:title="@string/nav_fac" />
+        <item
+          android:id="@+id/nav_stu"
+          android:title="@string/nav_stu" />
+        <item
+          android:id="@+id/nav_about"
+          android:title="@string/nav_about" />
+        <item
+          android:id="@+id/nav_logot"
+          android:title="@string/nav_logot" />
+    </group>
+
+</menu>

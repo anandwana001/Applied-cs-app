@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  <array name="project_image_array">
+    <item>@drawable/anagrams</item>
+    <item>@drawable/scarnesdice</item>
+    <item>@drawable/wordstack</item>
+    <item>@drawable/ghost</item>
+    <item>@drawable/puzzle</item>
+    <item>@drawable/wordladder</item>
+    <item>@drawable/blackhole</item>
+    <item>@drawable/continentaldivide</item>
+  </array>
+
+</resources>

@@ -1,0 +1,60 @@
+<resources>
+  <string name="app_name">ACS</string>
+
+  <string name="login_heading">Login</string>
+  <string name="login_description">This is not the official Applied cs with android app. </string>
+  <string name="student_name">Student Name</string>
+  <string name="college_name">College Name</string>
+
+  <string name="fac_id">Facilitator ID</string>
+  <string name="password">Password</string>
+  <string name="activity_login_sign_up">Login</string>
+  <string name="uniqueid">Generate Unique ID for Students</string>
+
+  <string name="create_workshop">Create Workshop</string>
+  <string name="join_workshop">Join Workshop</string>
+  <string name="enter_uniqueid">Enter unique id given by facilitator</string>
+  <string name="create_button">Create</string>
+  <string name="cancel_button">Cancel</string>
+  <string name="join_button">Join</string>
+  <string name="workshop_name">Workshop Name</string>
+  <string name="workshop">Workshop</string>
+  <string name="no_workshop">You have not attended any workshop</string>
+
+  <string name="navigation_drawer_open">Open navigation drawer</string>
+  <string name="navigation_drawer_close">Close navigation drawer</string>
+
+  <string name="nav_pro">Projects</string>
+  <string name="nav_learn">Learn</string>
+  <string name="nav_fac">Facilitator</string>
+  <string name="nav_stu">Student</string>
+  <string name="nav_about">About us</string>
+  <string name="nav_logot">Logout</string>
+
+  <string-array name="project_titles_array">
+    <item>anagrams</item>
+    <item>scarne's dice</item>
+    <item>word stack</item>
+    <item>ghost</item>
+    <item>puzzle 8</item>
+    <item>word ladder</item>
+    <item>black hole</item>
+    <item>continental divide</item>
+  </string-array>
+
+  <string-array name="project_titles_sub">
+    <item>HashSets, HashMaps</item>
+    <item>UI design, asynchronous programming</item>
+    <item>Drag and drop UI, stacks</item>
+    <item>Binary search, trees, tries</item>
+    <item>Heaps, priority queues, A* algorithm</item>
+    <item>Multiple activities, graphs</item>
+    <item>Unit testing, Monte Carlo method</item>
+    <item>Dynamic programming</item>
+  </string-array>
+
+  <!--Drawer-->
+  <string name="open_drawer">Drawer Open</string>
+  <string name="close_drawer">Drawer Close</string>
+
+</resources>

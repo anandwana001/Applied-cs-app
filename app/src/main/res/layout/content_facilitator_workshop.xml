@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tool="http://schemas.android.com/tools"
+  android:orientation="vertical"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:layout_marginStart="@dimen/activity_horizontal_margin"
+  android:layout_marginEnd="@dimen/activity_horizontal_margin"
+  android:layout_marginBottom="@dimen/activity_horizontal_margin">
+
+  <TextView
+    android:id="@+id/facilitator_workshop_name"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="@dimen/activity_horizontal_margin"
+    tool:text="Workshop Name"/>
+  <TextView
+    android:id="@+id/facilitator_workshop_id"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="12dp"
+    tool:text="Workshop ID"/>
+</LinearLayout>

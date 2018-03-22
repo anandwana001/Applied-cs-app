@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:orientation="vertical"
+  android:layout_margin="@dimen/activity_horizontal_margin">
+
+  <android.support.design.widget.TextInputLayout
+    android:id="@+id/workshop"
+    app:errorEnabled="true"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <android.support.design.widget.TextInputEditText
+      android:id="@+id/workshop_name"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:hint="@string/workshop_name"/>
+  </android.support.design.widget.TextInputLayout>
+
+  <android.support.design.widget.TextInputLayout
+    android:id="@+id/facId"
+    app:errorEnabled="true"
+    app:passwordToggleEnabled="true"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <android.support.design.widget.TextInputEditText
+      android:id="@+id/fac_code"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:hint="@string/fac_id"
+      android:imeOptions="actionGo"
+      android:inputType="textPassword"/>
+  </android.support.design.widget.TextInputLayout>
+
+  <android.support.design.widget.TextInputLayout
+    android:id="@+id/uniqueId"
+    app:errorEnabled="true"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <android.support.design.widget.TextInputEditText
+      android:id="@+id/unique_code"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:hint="@string/uniqueid"/>
+  </android.support.design.widget.TextInputLayout>
+
+</LinearLayout>
