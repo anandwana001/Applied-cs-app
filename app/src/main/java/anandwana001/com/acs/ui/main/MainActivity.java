@@ -2,6 +2,7 @@ package anandwana001.com.acs.ui.main;
 
 import anandwana001.com.acs.AcsApplication;
 import anandwana001.com.acs.R;
+import anandwana001.com.acs.base.BaseActivity;
 import anandwana001.com.acs.ui.fragment.about.AboutFragment;
 import anandwana001.com.acs.ui.fragment.facilitator.FacilitatorFragmentNew;
 import anandwana001.com.acs.ui.fragment.learn.LearnFragment;
@@ -20,7 +21,6 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import butterknife.BindView;
@@ -31,6 +31,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuth.AuthStateListener;
 import com.google.firebase.auth.FirebaseUser;
+import javax.inject.Inject;
 
 /**
  * Created by
@@ -39,7 +40,12 @@ import com.google.firebase.auth.FirebaseUser;
  * 01:06 PM.
  */
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class MainActivity extends BaseActivity
+    implements NavigationView.OnNavigationItemSelectedListener,
+              MainMvpView {
+
+  @Inject
+  MainMvpPresenter<MainMvpView> mPresenter;
 
   @BindView(R.id.toolbar)
   Toolbar toolbar;
@@ -86,7 +92,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     };
 
     setContentView(R.layout.activity_main);
-    ButterKnife.bind(this);
+    getActivityComponent().inject(this);
+    setUnBinder(ButterKnife.bind(this));
+    mPresenter.onAttach(MainActivity.this);
     setSupportActionBar(toolbar);
 
     GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(
@@ -188,7 +196,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
   @Override
   protected void onDestroy() {
+    mPresenter.onDetach();
     super.onDestroy();
+  }
+
+  @Override
+  protected void setUp() {
+
   }
 
   @Override
@@ -245,5 +259,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
   @Override
   public void onRestoreInstanceState(Bundle savedInstanceState, PersistableBundle persistentState) {
     super.onRestoreInstanceState(savedInstanceState, persistentState);
+  }
+
+  @Override
+  public void onFragmentAttached() {
+
+  }
+
+  @Override
+  public void onFragmentDetached(String tag) {
+
   }
 }

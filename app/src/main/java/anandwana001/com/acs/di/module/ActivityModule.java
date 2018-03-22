@@ -81,6 +81,7 @@ public class ActivityModule {
       StudentPresenter<StudentMvpView> presenter) {
     return presenter;
   }
+
   @Provides
   LinearLayoutManager provideLinearLayoutManager(AppCompatActivity activity) {
     return new LinearLayoutManager(activity);

@@ -11,15 +11,5 @@ import anandwana001.com.acs.base.MvpView;
 
 public interface MainMvpView extends MvpView {
 
-  void openLoginActivity();
 
-  void showProjectFragment();
-  void showLearFragment();
-  void showFacilitatorFragment();
-  void showStudentFragment();
-  void showAboutFragment();
-
-  void closeNavigationDrawer();
-  void lockDrawer();
-  void unlockDrawer();
 }
