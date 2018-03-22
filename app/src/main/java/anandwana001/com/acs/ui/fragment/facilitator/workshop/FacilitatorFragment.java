@@ -1,10 +1,11 @@
 package anandwana001.com.acs.ui.fragment.facilitator.workshop;
 
+import static anandwana001.com.acs.utils.CommonUtils.TAG_FAC;
+
 import anandwana001.com.acs.AcsApplication;
 import anandwana001.com.acs.R;
 import anandwana001.com.acs.ui.adapter.FacilitatorWorkshopViewHolder;
 import anandwana001.com.acs.ui.facilitator.FacilitatorActivity;
-import anandwana001.com.acs.ui.main.MainActivity;
 import anandwana001.com.acs.ui.model.FacilitatorWorkshopModel;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -241,7 +242,7 @@ public class FacilitatorFragment extends Fragment {
   @Override
   public void onResume() {
     super.onResume();
-    getActivity().setTitle(MainActivity.TAG_FAC);
+    getActivity().setTitle(TAG_FAC);
   }
 
   @Override

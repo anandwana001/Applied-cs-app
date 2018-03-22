@@ -1,9 +1,9 @@
 package anandwana001.com.acs.ui.fragment.project;
 
+import static anandwana001.com.acs.utils.CommonUtils.TAG_PROJ;
+
 import anandwana001.com.acs.R;
 import anandwana001.com.acs.ui.adapter.ProjectAdapter;
-import anandwana001.com.acs.ui.fragment.student.StudentFragment;
-import anandwana001.com.acs.ui.main.MainActivity;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v4.app.Fragment;
@@ -68,7 +68,7 @@ public class ProjectFragment extends Fragment {
     if (mListState != null) {
       mLayoutManager.onRestoreInstanceState(mListState);
     }
-    getActivity().setTitle(MainActivity.TAG_PROJ);
+    getActivity().setTitle(TAG_PROJ);
   }
 
   @Override

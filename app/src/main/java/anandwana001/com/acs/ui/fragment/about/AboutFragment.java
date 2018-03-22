@@ -1,9 +1,10 @@
 package anandwana001.com.acs.ui.fragment.about;
 
+import static anandwana001.com.acs.utils.CommonUtils.TAG_ABOT;
+
 import anandwana001.com.acs.R;
 import anandwana001.com.acs.base.BaseFragment;
 import anandwana001.com.acs.di.component.ActivityComponent;
-import anandwana001.com.acs.ui.main.MainActivity;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -50,7 +51,7 @@ public class AboutFragment extends BaseFragment implements AboutMvpView {
   @Override
   public void onResume() {
     super.onResume();
-    getActivity().setTitle(MainActivity.TAG_ABOT);
+    getActivity().setTitle(TAG_ABOT);
   }
   @Override
   protected void setUp(View view) {

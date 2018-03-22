@@ -1,5 +1,11 @@
 package anandwana001.com.acs.ui.main;
 
+import static anandwana001.com.acs.utils.CommonUtils.TAG_ABOT;
+import static anandwana001.com.acs.utils.CommonUtils.TAG_FAC;
+import static anandwana001.com.acs.utils.CommonUtils.TAG_LEARN;
+import static anandwana001.com.acs.utils.CommonUtils.TAG_PROJ;
+import static anandwana001.com.acs.utils.CommonUtils.TAG_STU;
+
 import anandwana001.com.acs.AcsApplication;
 import anandwana001.com.acs.R;
 import anandwana001.com.acs.base.BaseActivity;
@@ -17,6 +23,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -28,9 +35,7 @@ import butterknife.ButterKnife;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuth.AuthStateListener;
-import com.google.firebase.auth.FirebaseUser;
 import javax.inject.Inject;
 
 /**
@@ -54,18 +59,11 @@ public class MainActivity extends BaseActivity
   @BindView(R.id.drawer_layout)
   DrawerLayout drawer;
 
-  public static final String TAG_PROJ = "Projects";
-  public static final String TAG_LEARN = "Learn";
-  public static final String TAG_FAC = "Facilitator";
-  public static final String TAG_STU = "Student";
-  public static final String TAG_ABOT = "About";
   public static String CURRENT_TAG = TAG_PROJ;
 
   public static int navItemIndex = 0;
   public Fragment fragment;
 
-  private FirebaseAuth mFirebaseAuth;
-  private FirebaseUser mFirebaseUser;
   private AuthStateListener mAuthListener;
   private GoogleApiClient googleApiClient;
 
@@ -77,34 +75,15 @@ public class MainActivity extends BaseActivity
   protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
 
-    mFirebaseAuth = AcsApplication.getInstanceAuth();
-    mFirebaseUser = mFirebaseAuth.getCurrentUser();
-    mAuthListener = new AuthStateListener() {
-      @Override
-      public void onAuthStateChanged(FirebaseAuth firebaseAuth) {
-        if (mFirebaseUser == null) {
-          Intent loginIntent = new Intent(MainActivity.this, LoginActivityNew.class);
-          loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-          startActivity(loginIntent);
-          finish();
-        }
-      }
-    };
+    getActivityComponent().inject(this);
+    mPresenter.onAttach(MainActivity.this);
+
+    mAuthListener = mPresenter.authCheck(AcsApplication.getInstanceAuth());
 
     setContentView(R.layout.activity_main);
-    getActivityComponent().inject(this);
     setUnBinder(ButterKnife.bind(this));
-    mPresenter.onAttach(MainActivity.this);
-    setSupportActionBar(toolbar);
 
-    GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(
-        GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken(getString(
-        R.string.default_web_client_id))
-        .requestEmail()
-        .build();
-    googleApiClient = new GoogleApiClient.Builder(this)
-        .addApi(Auth.GOOGLE_SIGN_IN_API, googleSignInOptions)
-        .build();
+    setUp();
 
     if (savedInstanceState != null) {
       fragment = getSupportFragmentManager().getFragment(savedInstanceState, "myFragmentName");
@@ -118,16 +97,29 @@ public class MainActivity extends BaseActivity
       CURRENT_TAG = TAG_PROJ;
       loadHomeFragment();
     }
+  }
 
-    ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-    drawer.setDrawerListener(toggle);
+  @Override
+  protected void setUp() {
+    setSupportActionBar(toolbar);
+    GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(
+        GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken(getString(
+        R.string.default_web_client_id))
+        .requestEmail()
+        .build();
+    googleApiClient = new GoogleApiClient.Builder(this)
+        .addApi(Auth.GOOGLE_SIGN_IN_API, googleSignInOptions)
+        .build();
+
+    ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer,
+        toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+    drawer.addDrawerListener(toggle);
     toggle.syncState();
     navView.setNavigationItemSelectedListener(this);
   }
 
   private void loadHomeFragment() {
-    selectNavMenu();
-
+    navView.getMenu().getItem(navItemIndex).setChecked(true);
     if (getSupportFragmentManager().findFragmentByTag(CURRENT_TAG) != null) {
       drawer.closeDrawers();
     } else {
@@ -165,8 +157,11 @@ public class MainActivity extends BaseActivity
     return sendFragment;
   }
 
-  private void selectNavMenu() {
-    navView.getMenu().getItem(navItemIndex).setChecked(true);
+  @Override
+  protected void onResume() {
+    super.onResume();
+    if (drawer != null)
+      drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
   }
 
   @Override
@@ -178,17 +173,18 @@ public class MainActivity extends BaseActivity
     super.onBackPressed();
   }
 
+
   @Override
   public void onStart() {
     super.onStart();
     googleApiClient.connect();
-    mFirebaseAuth.addAuthStateListener(mAuthListener);
+    AcsApplication.getInstanceAuth().addAuthStateListener(mAuthListener);
   }
 
   @Override
   public void onStop() {
     if (mAuthListener != null) {
-      mFirebaseAuth.removeAuthStateListener(mAuthListener);
+      AcsApplication.getInstanceAuth().removeAuthStateListener(mAuthListener);
     }
     googleApiClient.disconnect();
     super.onStop();
@@ -198,11 +194,6 @@ public class MainActivity extends BaseActivity
   protected void onDestroy() {
     mPresenter.onDetach();
     super.onDestroy();
-  }
-
-  @Override
-  protected void setUp() {
-
   }
 
   @Override
@@ -230,11 +221,7 @@ public class MainActivity extends BaseActivity
         break;
       case R.id.nav_logot:
         navItemIndex = 5;
-        FirebaseAuth.getInstance().signOut();
-        Intent intent = new Intent(MainActivity.this,LoginActivityNew.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent);
-        finish();
+        mPresenter.signOut();
         break;
       default:
         navItemIndex = 0;
@@ -268,6 +255,34 @@ public class MainActivity extends BaseActivity
 
   @Override
   public void onFragmentDetached(String tag) {
+    FragmentManager fragmentManager = getSupportFragmentManager();
+    Fragment fragment = fragmentManager.findFragmentByTag(tag);
+    if (fragment != null) {
+      fragmentManager
+          .beginTransaction()
+          .disallowAddToBackStack()
+          .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
+          .remove(fragment)
+          .commitNow();
+      unlockDrawer();
+    }
+  }
 
+  @Override
+  public void openLoginActivity() {
+    startActivity(LoginActivityNew.getStartIntent(this));
+    finish();
+  }
+
+  @Override
+  public void lockDrawer() {
+    if (drawer != null)
+      drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+  }
+
+  @Override
+  public void unlockDrawer() {
+    if (drawer != null)
+      drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
   }
 }

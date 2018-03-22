@@ -1,8 +1,8 @@
 package anandwana001.com.acs.ui.fragment.learn;
 
+import static anandwana001.com.acs.utils.CommonUtils.TAG_LEARN;
+
 import anandwana001.com.acs.R;
-import anandwana001.com.acs.ui.fragment.project.ProjectFragment;
-import anandwana001.com.acs.ui.main.MainActivity;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -38,6 +38,6 @@ public class LearnFragment extends Fragment {
   @Override
   public void onResume() {
     super.onResume();
-    getActivity().setTitle(MainActivity.TAG_LEARN);
+    getActivity().setTitle(TAG_LEARN);
   }
 }

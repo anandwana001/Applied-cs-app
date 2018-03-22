@@ -1,10 +1,10 @@
 package anandwana001.com.acs.ui.fragment.facilitator;
 
+import static anandwana001.com.acs.utils.CommonUtils.TAG_FAC;
+
 import anandwana001.com.acs.R;
 import anandwana001.com.acs.ui.fragment.facilitator.name.FacilitatorNameFragment;
 import anandwana001.com.acs.ui.fragment.facilitator.workshop.FacilitatorFragment;
-import anandwana001.com.acs.ui.fragment.learn.LearnFragment;
-import anandwana001.com.acs.ui.main.MainActivity;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -93,7 +93,7 @@ public class FacilitatorFragmentNew extends Fragment {
   @Override
   public void onResume() {
     super.onResume();
-    getActivity().setTitle(MainActivity.TAG_FAC);
+    getActivity().setTitle(TAG_FAC);
   }
 
   @Override

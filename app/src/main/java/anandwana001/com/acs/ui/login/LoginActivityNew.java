@@ -46,6 +46,7 @@ public class LoginActivityNew extends BaseActivity implements LoginMvpView {
 
   public static Intent getStartIntent(Context context) {
     Intent intent = new Intent(context, LoginActivityNew.class);
+    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
     return intent;
   }
 

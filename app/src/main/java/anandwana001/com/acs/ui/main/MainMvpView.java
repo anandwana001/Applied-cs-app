@@ -11,5 +11,8 @@ import anandwana001.com.acs.base.MvpView;
 
 public interface MainMvpView extends MvpView {
 
+  void openLoginActivity();
+  void lockDrawer();
+  void unlockDrawer();
 
 }

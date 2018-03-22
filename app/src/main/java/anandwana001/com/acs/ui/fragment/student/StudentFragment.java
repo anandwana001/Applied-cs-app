@@ -1,10 +1,11 @@
 package anandwana001.com.acs.ui.fragment.student;
 
+import static anandwana001.com.acs.utils.CommonUtils.TAG_STU;
+
 import anandwana001.com.acs.AcsApplication;
 import anandwana001.com.acs.R;
 import anandwana001.com.acs.base.BaseFragment;
 import anandwana001.com.acs.di.component.ActivityComponent;
-import anandwana001.com.acs.ui.main.MainActivity;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -333,7 +334,7 @@ public class StudentFragment extends BaseFragment implements StudentMvpView {
   @Override
   public void onResume() {
     super.onResume();
-    getActivity().setTitle(MainActivity.TAG_STU);
+    getActivity().setTitle(TAG_STU);
   }
 
   @Override
